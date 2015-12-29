@@ -1,0 +1,84 @@
+apply plugin: 'com.android.application'
+
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.blackcat.gank"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            //设置是否混淆
+            minifyEnabled true
+            //设置压缩对齐
+            zipAlignEnabled true
+            //移除无用的资源文件
+            shrinkResources true
+            //设置混淆配置文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            //指定签名包得输入文件名称
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为Gank_v1.0_2015-01-15_wandoujia.apk
+                        def fileName = "Gank_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
+
+        }
+
+        productFlavors {
+            Beta{
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE:"Beta"]
+            }
+            XiaoMi {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE:"XiaoMi"]
+            }
+            QiHu360 {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE:"QiHu360"]
+            }
+            WanDouJia {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "WanDouJia"]
+            }
+            Fir {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Fir"]
+            }
+            Umeng {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Umeng"]
+            }
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+
+    compile 'com.jakewharton:butterknife:7.0.1'
+
+    compile 'com.squareup.okhttp:okhttp:2.7.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
+    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+    compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
+
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.1.0'
+
+    compile 'com.github.orhanobut:logger:1.12'
+}
