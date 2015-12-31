@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.blackcat.gank.utils.ToastUtil;
+import com.blackcat.retrofitutil.RetrofitUtil;
 
 public class AppContext extends Application {
 
@@ -15,6 +16,7 @@ public class AppContext extends Application {
         super.onCreate();
         instatnce = this;
         ToastUtil.register(this);
+        RetrofitUtil.init(this);
     }
 
     public static Context getInstatnce() {
