@@ -40,6 +40,7 @@ public class RetrofitUtil {
                     retrofit = new Retrofit.Builder()
                             .baseUrl(baseUrl)
                             .addConverterFactory(GsonConverterFactory.create())
+//                            .addConverterFactory(GsonConverterFactory.create(GsonUtil.INSTANCE.get()))
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .client(OkHttpUtil.getInstatnce(mContext))
                             .build();

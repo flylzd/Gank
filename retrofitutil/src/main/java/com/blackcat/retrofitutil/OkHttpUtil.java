@@ -27,9 +27,8 @@ public class OkHttpUtil {
                     okHttpClient.setConnectTimeout(HTTP_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS);
                     okHttpClient.setReadTimeout(HTTP_READ_TIMEOUT, TimeUnit.MILLISECONDS);
 
-                    if (getOkHttpConfig().isLog()) {
-                        okHttpClient.networkInterceptors().add(new LoggingInterceptor());
-                    }
+                    okHttpClient.networkInterceptors().add(new LoggingInterceptor());
+                    okHttpClient.interceptors().add(new BodyInterceptor());
                 }
             }
         }

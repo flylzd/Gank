@@ -9,7 +9,7 @@ import retrofit.RxJavaCallAdapterFactory;
 
 public class API {
 
-    private static String BASE_URL = "http://www.baidu.com";
+    private static String BASE_URL = "https://api.github.com/";
     private static ApiService apiService;
 
 //    public ApiService getApiService() {
@@ -32,7 +32,11 @@ public class API {
 
 
     public static ApiService getApiService() {
-        return RetrofitUtil.createApiService(ApiService.class,BASE_URL);
+        return createApiService(ApiService.class);
+    }
+
+    public static <T> T createApiService(Class<T> clazz) {
+        return RetrofitUtil.createApiService(clazz,BASE_URL);
     }
 
 }

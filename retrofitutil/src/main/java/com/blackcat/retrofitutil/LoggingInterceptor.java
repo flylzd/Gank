@@ -5,8 +5,18 @@ import com.orhanobut.logger.Logger;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.Response;
 import com.squareup.okhttp.Request;
+import com.squareup.okhttp.ResponseBody;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
+
+import okio.Buffer;
+import okio.BufferedSink;
+import okio.ByteString;
+import okio.Sink;
+import okio.Source;
+import okio.Timeout;
 
 public class LoggingInterceptor implements Interceptor {
 
@@ -17,11 +27,11 @@ public class LoggingInterceptor implements Interceptor {
         Request request = chain.request();
         Logger.i(String.format("Sending request : %s %n %s %n %s",
                 request.url(), chain.connection(), request.headers()));
+
         Response response = chain.proceed(request);
         long t2 = System.nanoTime();
-        Logger.i(String.format("Received response for %s in %.1fms %n %s",
+        Logger.i(String.format("Received response for %s %nin %.1fms %n%s",
                 request.url(), (t2 - t1) / 1e6d, response.headers()));
-        Logger.i(String.format("Received response for %s %n %s ",request.url(), response.body().toString()));
         return response;
     }
 }

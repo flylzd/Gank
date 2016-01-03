@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.blackcat.gank.utils.ToastUtil;
 import com.blackcat.retrofitutil.RetrofitUtil;
+import com.orhanobut.logger.Logger;
 
 public class AppContext extends Application {
 
@@ -17,6 +18,7 @@ public class AppContext extends Application {
         instatnce = this;
         ToastUtil.register(this);
         RetrofitUtil.init(this);
+        Logger.init();
     }
 
     public static Context getInstatnce() {
