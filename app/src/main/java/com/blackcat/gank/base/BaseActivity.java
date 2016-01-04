@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.blackcat.gank.R;
+import com.blackcat.gank.utils.ActivityManager;
 import com.blackcat.gank.utils.StatusBarCompat;
 import com.orhanobut.logger.Logger;
 
@@ -19,15 +20,36 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Bundle extras = getIntent().getExtras();
+        if (null != extras) {
+            getBundleExtras(extras);
+        }
+
+        onBeforeSetContentView();
         int layoutId = getLayoutId();
         if (layoutId == ERROR_LAYOUT_ID) {
-            Logger.d("Must initial layout id in the activity");
-            return;
+            throw new NullPointerException("Must initial layout id in the activity");
         }
         rootView = View.inflate(this, getLayoutId(), null);
         setContentView(rootView);
 
         StatusBarCompat.compat(this, getResources().getColor(R.color.colorPrimaryDark));
+
+        initViewsAndEvents(savedInstanceState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    protected void getBundleExtras(Bundle extras) {
+
+    }
+
+    protected void onBeforeSetContentView() {
+
     }
 
     protected int getLayoutId() {
@@ -38,7 +60,7 @@ public class BaseActivity extends AppCompatActivity {
 
     }
 
-    protected void initView() {
+    protected void initViewsAndEvents(Bundle savedInstanceState) {
 
     }
 
