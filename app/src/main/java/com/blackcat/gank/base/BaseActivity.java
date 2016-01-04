@@ -11,6 +11,8 @@ import com.orhanobut.logger.Logger;
 
 public class BaseActivity extends AppCompatActivity {
 
+    private static final int ERROR_LAYOUT_ID = 0;
+
     private View rootView;
 
     @Override
@@ -18,7 +20,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         int layoutId = getLayoutId();
-        if (layoutId == 0) {
+        if (layoutId == ERROR_LAYOUT_ID) {
             Logger.d("Must initial layout id in the activity");
             return;
         }
@@ -29,7 +31,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected int getLayoutId() {
-        return 0;
+        return ERROR_LAYOUT_ID;
     }
 
     protected void initToolbar() {

@@ -22,7 +22,7 @@ public class ResUtil {
         }
     }
 
-    public int getColor(int resId) {
+    public static int getColor(int resId) {
         checkNotNull();
         return mContext.getResources().getColor(resId);
     }
@@ -32,22 +32,22 @@ public class ResUtil {
 //        return mContext.getResources().getColor(colorId, theme);
 //    }
 
-    public String getString(int resId) {
+    public static String getString(int resId) {
         checkNotNull();
         return mContext.getResources().getString(resId);
     }
 
-    public String getString(int resId, Object... formatArgs) {
+    public static String getString(int resId, Object... formatArgs) {
         checkNotNull();
         return mContext.getResources().getString(resId, formatArgs);
     }
 
-    public String[] getStringArray(int resId) {
+    public static String[] getStringArray(int resId) {
         checkNotNull();
         return mContext.getResources().getStringArray(resId);
     }
 
-    public Drawable getDrawable(int resId) {
+    public static Drawable getDrawable(int resId) {
         checkNotNull();
         return mContext.getResources().getDrawable(resId);
     }
