@@ -6,9 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.blackcat.gank.R;
-import com.blackcat.gank.utils.ActivityManager;
 import com.blackcat.gank.utils.StatusBarCompat;
-import com.orhanobut.logger.Logger;
 
 public class BaseActivity extends AppCompatActivity {
 
