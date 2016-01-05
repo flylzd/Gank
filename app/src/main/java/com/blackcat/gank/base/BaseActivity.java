@@ -8,6 +8,8 @@ import android.view.View;
 import com.blackcat.gank.R;
 import com.blackcat.gank.utils.StatusBarCompat;
 
+import butterknife.ButterKnife;
+
 public class BaseActivity extends AppCompatActivity {
 
     private static final int ERROR_LAYOUT_ID = 0;
@@ -26,12 +28,14 @@ public class BaseActivity extends AppCompatActivity {
         onBeforeSetContentView();
         int layoutId = getLayoutId();
         if (layoutId == ERROR_LAYOUT_ID) {
-            throw new NullPointerException("Must initial layout id in the activity");
+            throw new IllegalArgumentException("You must return a right contentView layout resource Id");
         }
         rootView = View.inflate(this, getLayoutId(), null);
         setContentView(rootView);
 
-        StatusBarCompat.compat(this, getResources().getColor(R.color.colorPrimaryDark));
+        StatusBarCompat.compat(this, getResources().getColor(R.color.colorAccent));
+//        StatusBarCompat.compat(this, getResources().getColor(R.color.colorPrimary));
+        ButterKnife.bind(this);
 
         initViewsAndEvents(savedInstanceState);
     }
@@ -39,7 +43,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        ButterKnife.unbind(this);
     }
 
     protected void getBundleExtras(Bundle extras) {

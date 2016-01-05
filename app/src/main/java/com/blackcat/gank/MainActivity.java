@@ -4,9 +4,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.design.widget.NavigationView;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 
 import com.blackcat.gank.api.API;
@@ -15,6 +19,7 @@ import com.blackcat.gank.bean.User;
 import com.blackcat.gank.utils.StatusBarCompat;
 import com.blackcat.gank.utils.ToastUtil;
 
+import butterknife.Bind;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -24,14 +29,39 @@ public class MainActivity extends BaseActivity {
     private static final String ACTION_EXIT = "action.exit";
     private ExitReceiver exitReceiver = new ExitReceiver();
 
+    @Bind(R.id.drawerLayout)
+    DrawerLayout drawerLayout;
+
+    @Bind(R.id.navigationView)
+    NavigationView navigationView;
+
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initViewsAndEvents(Bundle savedInstanceState) {
 
         registerExitReceiver();
 
-//        API.getApiService().getBaidu().enqueue(new Callback<User>() {
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
+        actionBarDrawerToggle.syncState();
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+
+//        StatusBarCompat.compat(this);
+//        StatusBarCompat.compat(this, getResources().getColor(R.color.colorAccent));
+
+
+        //        API.getApiService().getBaidu().enqueue(new Callback<User>() {
 //            @Override
 //            public void onResponse(Response<User> response, Retrofit retrofit) {
 ////                System.out.println(response.body().toString());
@@ -44,11 +74,6 @@ public class MainActivity extends BaseActivity {
 //                System.out.println("Throwable " + t.toString());
 //            }
 //        });
-    }
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_main;
     }
 
     @Override
