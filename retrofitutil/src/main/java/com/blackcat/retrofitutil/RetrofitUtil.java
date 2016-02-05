@@ -39,6 +39,7 @@ public class RetrofitUtil {
                 if (retrofit == null) {
                     retrofit = new Retrofit.Builder()
                             .baseUrl(baseUrl)
+                            .addConverterFactory(StringConverterFactory.create())
                             .addConverterFactory(GsonConverterFactory.create())
 //                            .addConverterFactory(GsonConverterFactory.create(GsonUtil.INSTANCE.get()))
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())

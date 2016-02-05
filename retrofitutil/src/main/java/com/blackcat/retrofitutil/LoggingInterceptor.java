@@ -25,13 +25,13 @@ public class LoggingInterceptor implements Interceptor {
 
         long t1 = System.nanoTime();
         Request request = chain.request();
-        Logger.i(String.format("Sending request : %s %n %s %n %s",
-                request.url(), chain.connection(), request.headers()));
+        Logger.i(String.format("Sending request : %s %n %s %n %s %n %s",
+                request.url(), request.method(), chain.connection(), request.headers()));
 
         Response response = chain.proceed(request);
         long t2 = System.nanoTime();
-        Logger.i(String.format("Received response for %s %nin %.1fms %n%s",
-                request.url(), (t2 - t1) / 1e6d, response.headers()));
+        Logger.i(String.format("Received response for %s %nin %.1fms responseCode: %s %n%s",
+                request.url(), (t2 - t1) / 1e6d,response.code(), response.headers()));
         return response;
     }
 }

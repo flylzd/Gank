@@ -33,7 +33,7 @@ public class BaseActivity extends AppCompatActivity {
         rootView = View.inflate(this, getLayoutId(), null);
         setContentView(rootView);
 
-        StatusBarCompat.compat(this, getResources().getColor(R.color.colorAccent));
+//        StatusBarCompat.compat(this, getResources().getColor(R.color.colorAccent));
 //        StatusBarCompat.compat(this, getResources().getColor(R.color.colorPrimary));
         ButterKnife.bind(this);
 

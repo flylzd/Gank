@@ -74,6 +74,19 @@ public class MainActivity extends BaseActivity {
 //                System.out.println("Throwable " + t.toString());
 //            }
 //        });
+
+        API.getApiService().getBaidu().enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Response<String> response, Retrofit retrofit) {
+
+//                System.out.println("response " + response.body());
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
     }
 
     @Override

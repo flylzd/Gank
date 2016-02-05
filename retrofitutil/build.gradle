@@ -12,13 +12,22 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            //设置是否混淆
+            minifyEnabled true
+            //设置压缩对齐
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            proguardFiles  'proguard-rules.pro'
         }
     }
 
     lintOptions {
         abortOnError false
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
     }
 
 }
@@ -42,7 +51,6 @@ dependencies {
     compile 'com.github.orhanobut:logger:1.12'
 }
 
-
 task clearJar(type: Delete) {
     delete 'build/libs/retrofitutil.jar'
 }
@@ -54,4 +62,25 @@ task makeJar(type: Copy) {
     rename ('classes.jar', 'retrofitutil.jar')
 }
 
+//task proguard(type: proguard.gradle.ProGuardTask, dependsOn: makeJar) {
+////  输入路径
+//    injars "build/libs/un_proguard.jar"
+////  输出路径
+//    outjars 'libs/app_proguard.jar'
+////  添加配置信息
+//    configuration 'proguard-rules.pro'
+//}
+
+//tasks.withType(Compile) {
+//    options.encoding = "UTF-8"
+//}
+
 makeJar.dependsOn(clearJar, build)
+
+//在终端执行生成JAR包
+//gradlew makeJar
+
+//gradlew clean
+//gradlew assembleRelease
+
+//gradlew compileDebug --stacktrace   //

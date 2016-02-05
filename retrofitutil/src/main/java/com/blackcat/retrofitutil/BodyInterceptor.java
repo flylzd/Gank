@@ -1,6 +1,8 @@
 package com.blackcat.retrofitutil;
 
 
+import android.os.Looper;
+
 import com.orhanobut.logger.Logger;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.Request;
@@ -17,7 +19,8 @@ public class BodyInterceptor implements Interceptor {
         Request request = chain.request();
         Response response = chain.proceed(request);
         String bodyString = response.body().string();
-        Logger.json(bodyString);
+        Logger.d(bodyString);
+//        Logger.json(bodyString);
         return response.newBuilder()
                 .body(ResponseBody.create(response.body().contentType(), bodyString))
                 .build();

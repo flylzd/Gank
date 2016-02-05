@@ -10,6 +10,8 @@ import retrofit.http.POST;
 public interface ApiService {
 
     @GET("https://api.github.com")
-    Call<User> getBaidu();
+    Call<User> getUser();
 
+    @POST("https://www.baidu.com")
+    Call<String> getBaidu();
 }

@@ -18,7 +18,7 @@ android {
     buildTypes {
         release {
             //设置是否混淆
-            minifyEnabled true
+            minifyEnabled false
             //设置压缩对齐
             zipAlignEnabled true
             //移除无用的资源文件
@@ -88,6 +88,6 @@ dependencies {
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 
     compile project(':retrofitutil')
-    compile project(':pagestatelayout')
+//    compile project(':pagestatelayout')
 
 }
