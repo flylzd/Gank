@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -27,7 +28,11 @@ public class OkHttpUtil {
                     okHttpClient.setConnectTimeout(HTTP_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS);
                     okHttpClient.setReadTimeout(HTTP_READ_TIMEOUT, TimeUnit.MILLISECONDS);
 
-                    okHttpClient.networkInterceptors().add(new LoggingInterceptor());
+//                    okHttpClient.networkInterceptors().add(new LoggingInterceptor());
+                    // Log信息
+                    HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+                    loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                    okHttpClient.networkInterceptors().add(loggingInterceptor);
                     okHttpClient.interceptors().add(new BodyInterceptor());
                 }
             }
